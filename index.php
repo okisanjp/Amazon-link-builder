@@ -55,7 +55,7 @@
 <body>
 
 <?php
-require_once('./config.php');
+require_once('./config.inc');
 require_once('Services/Amazon.php');
 
 define('RESPONSE_GROUP','Large');
@@ -76,14 +76,14 @@ $xml= $amazon->ItemLookup($asin,$options);
 if(PEAR::isError($xml)){
     echo "Amazonの個別商品ページでお使いください。";
 }else{
-    
-    $data = $xml['Item'][0];    
+
+    $data = $xml['Item'][0];
     $price = '<div class="alb-price">' . $data['ItemAttributes']['ListPrice']['FormattedPrice'] . '</div>';
     $release_date = "";
     if(isset($data['ItemAttributes']['ReleaseDate'])){
         $release_date .= '<div class="alb-mini">発売日：' . $data['ItemAttributes']['ReleaseDate'] . '</div>';
     }
-    
+
     $release_extend = "";
     if (isset($data['ItemAttributes']['PublicationDate'])){
         $release_extend  .= '<div class="alb-mini">発行日：'.$data['ItemAttributes']['PublicationDate'];
@@ -100,16 +100,16 @@ if(PEAR::isError($xml)){
     }
         $release_extend  .= '</div>';
     }else{
-        
+
         if(isset($data['ItemAttributes']['Manufacturer'])){
             $release_extend  .= '<div class="alb-mini">販売元：' . $data['ItemAttributes']['Manufacturer'] . '</div>';
         }
     }
-    
+
     $now = '<div class="alb-micro">UPDATE:' . date("Y/m/d H:i:s") . '</div>';
     $asin = $data['ASIN'];
     $afflink = $data['DetailPageURL'];
-    
+
     $html = '';
     $html .= '<div class="alb-wrapper">';
     $html .= '<div class="alb-left">';
@@ -126,13 +126,13 @@ if(PEAR::isError($xml)){
     $html .= '<div class="alb-clearfix"></div>';
     $html .= '</div>';
     $html .= '';
- 
+
     echo $html;
 }
 
 
 ?>
- 
+
 <?php if(!PEAR::isError($xml)){ ?>
 <h2>貼りつけ用コード</h2>
 <textarea readonly cols=50 rows=5>
