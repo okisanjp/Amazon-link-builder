@@ -2,55 +2,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>AmazonLINK</title>
-<style type="text/css">
-	.alb-price {
-		font-weight:bold;
-		color:#c00;
-	}
-	.alb-mini {
-		font-size:11px;
-	}
-	.alb-micro {
-		font-size:1px;
-		color:#999;
-	}
-	.alb-wrapper {
-		width:500px;
-		border:1px solid #999;
-		background:#fefefe;
-		margin:16px 0;
-		padding:4px;
-		border-radius:3px;
-	}
-	.alb-left {
-		width:170px;
-		float:left;
-	}
-	.alb-right {
-		width:330px;
-		float:left;
-	}
-	.alb-img {
-		border:1px solid #eee;
-	}
-	.alb-clearfix:after {
-	  content: ".";  /* 新しい要素を作る */
-	  display: block;  /* ブロックレベル要素に */
-	  clear: both;
-	  height: 0;
-	  visibility: hidden;
-	}
-	.alb-clearfix {
-	  min-height: 1px;
-	}
-	* html .alb-clearfix {
-	  height: 1px;
-	  /*¥*//*/
-	  height: auto;
-	  overflow: hidden;
-	  /**/
-	}
-</style>
 </head>
 <body>
 
@@ -78,15 +29,15 @@ if(PEAR::isError($xml)){
 }else{
 
     $data = $xml['Item'][0];
-    $price = '<div class="alb-price">' . $data['ItemAttributes']['ListPrice']['FormattedPrice'] . '</div>';
+    $price = '<div style="font-weight:bold;color:#c00;">' . $data['ItemAttributes']['ListPrice']['FormattedPrice'] . '</div>';
     $release_date = "";
     if(isset($data['ItemAttributes']['ReleaseDate'])){
-        $release_date .= '<div class="alb-mini">発売日：' . $data['ItemAttributes']['ReleaseDate'] . '</div>';
+        $release_date .= '<div style="font-size:11px;">発売日：' . $data['ItemAttributes']['ReleaseDate'] . '</div>';
     }
 
     $release_extend = "";
     if (isset($data['ItemAttributes']['PublicationDate'])){
-        $release_extend  .= '<div class="alb-mini">発行日：'.$data['ItemAttributes']['PublicationDate'];
+        $release_extend  .= '<div style="font-size:11px;">発行日：'.$data['ItemAttributes']['PublicationDate'];
         if ( isset ($data['ItemAttributes']['Label'])){
             $release_extend  .= '<br />発行元：'.$data['ItemAttributes']['Label'];
     }
@@ -102,20 +53,20 @@ if(PEAR::isError($xml)){
     }else{
 
         if(isset($data['ItemAttributes']['Manufacturer'])){
-            $release_extend  .= '<div class="alb-mini">販売元：' . $data['ItemAttributes']['Manufacturer'] . '</div>';
+            $release_extend  .= '<div style="font-size:11px;">販売元：' . $data['ItemAttributes']['Manufacturer'] . '</div>';
         }
     }
 
-    $now = '<div class="alb-micro">UPDATE:' . date("Y/m/d H:i:s") . '</div>';
+    $now = '<div style="font-size:11px;color:#999;">UPDATE:' . date("Y/m/d H:i:s") . '</div>';
     $asin = $data['ASIN'];
     $afflink = $data['DetailPageURL'];
 
     $html = '';
-    $html .= '<div class="alb-wrapper">';
-    $html .= '<div class="alb-left">';
-    $html .= '<a href="' . $afflink . '" target="_blank"><img src="' . $data['MediumImage'] ['URL'] . '" alt="" class="alb-img" /></a>';
+    $html .= '<div style="width:500px;border:1px solid #999;background:#fefefe;margin:16px 0;padding:4px;border-radius:3px;">';
+    $html .= '<div style="width:170px;float:left;">';
+    $html .= '<a href="' . $afflink . '" target="_blank"><img src="' . $data['MediumImage'] ['URL'] . '" alt="" style="border:1px solid #eee;" /></a>';
     $html .= '</div>';
-    $html .= '<div class="alb-right">';
+    $html .= '<div style="width:330px;float:left;">';
     $html .= '<a href="' . $afflink . '" target="_blank">' . $data['ItemAttributes']['Title'] . '</a>';
     $html .= $price;
     $html .= $release_date;
@@ -123,7 +74,7 @@ if(PEAR::isError($xml)){
     $html .= $now;
     $html .= '<br /><a href="' . $afflink . '" target="_blank">→ Amazonで見る</a>';
     $html .= '</div>';
-    $html .= '<div class="alb-clearfix"></div>';
+    $html .= '<div style="clear:left;"></div>';
     $html .= '</div>';
     $html .= '';
 
