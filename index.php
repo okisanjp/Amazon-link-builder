@@ -62,11 +62,11 @@ if(PEAR::isError($xml)){
     $afflink = $data['DetailPageURL'];
 
     $html = '';
-    $html .= '<div style="width:500px;border:1px solid #999;background:#fefefe;margin:16px 0;padding:4px;border-radius:3px;">';
-    $html .= '<div style="width:170px;float:left;">';
+    $html .= '<div style="width:100%;border:1px solid #999;background:#fefefe;margin:16px 0;padding:4px;border-radius:3px;">';
+    $html .= '<div style="min-width:120px;float:left;">';
     $html .= '<a href="' . $afflink . '" target="_blank"><img src="' . $data['MediumImage'] ['URL'] . '" alt="" style="border:1px solid #eee;" /></a>';
     $html .= '</div>';
-    $html .= '<div style="width:330px;float:left;">';
+    $html .= '<div style="min-width:330px;float:left;">';
     $html .= '<a href="' . $afflink . '" target="_blank">' . $data['ItemAttributes']['Title'] . '</a>';
     $html .= $price;
     $html .= $release_date;
